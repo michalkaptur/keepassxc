@@ -796,6 +796,9 @@ QString Entry::resolveUrl(const QString& url) const
 {
 #ifdef WITH_XC_HTTP
     QString newUrl = url;
+    if (url.isEmpty()) {
+        return url;
+    }
     if (!url.contains("://")) {
         // URL doesn't have a protocol, add https by default
         newUrl.prepend("https://");
