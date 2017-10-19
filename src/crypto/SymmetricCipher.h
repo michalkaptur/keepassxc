@@ -50,7 +50,7 @@ public:
 
     SymmetricCipher(SymmetricCipher::Algorithm algo, SymmetricCipher::Mode mode,
                     SymmetricCipher::Direction direction);
-    ~SymmetricCipher();
+    ~SymmetricCipher() = default;
 
     bool init(const QByteArray& key, const QByteArray& iv);
     bool isInitalized() const;

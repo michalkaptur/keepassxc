@@ -27,10 +27,6 @@ SymmetricCipher::SymmetricCipher(SymmetricCipher::Algorithm algo, SymmetricCiphe
 {
 }
 
-SymmetricCipher::~SymmetricCipher()
-{
-}
-
 bool SymmetricCipher::init(const QByteArray& key, const QByteArray& iv)
 {
     if (!m_backend->init()) {
