@@ -42,7 +42,7 @@ public:
         Stream
     };
 
-    enum Direction
+    enum class Direction
     {
         Decrypt,
         Encrypt

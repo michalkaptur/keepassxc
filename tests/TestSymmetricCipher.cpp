@@ -44,7 +44,7 @@ void TestSymmetricCipher::testAes256CbcEncryption()
     cipherText.append(QByteArray::fromHex("9cfc4e967edb808d679f777bc6702c7d"));
     bool ok;
 
-    SymmetricCipher cipher(SymmetricCipher::Aes256, SymmetricCipher::Cbc, SymmetricCipher::Encrypt);
+    SymmetricCipher cipher(SymmetricCipher::Aes256, SymmetricCipher::Cbc, SymmetricCipher::Direction::Encrypt);
     QVERIFY(cipher.init(key, iv));
     QCOMPARE(cipher.blockSize(), 16);
 
@@ -54,7 +54,7 @@ void TestSymmetricCipher::testAes256CbcEncryption()
 
     QBuffer buffer;
     SymmetricCipherStream stream(&buffer, SymmetricCipher::Aes256, SymmetricCipher::Cbc,
-                                 SymmetricCipher::Encrypt);
+                                 SymmetricCipher::Direction::Encrypt);
     QVERIFY(stream.init(key, iv));
     buffer.open(QIODevice::WriteOnly);
     QVERIFY(stream.open(QIODevice::WriteOnly));
@@ -91,7 +91,7 @@ void TestSymmetricCipher::testAes256CbcDecryption()
     plainText.append(QByteArray::fromHex("ae2d8a571e03ac9c9eb76fac45af8e51"));
     bool ok;
 
-    SymmetricCipher cipher(SymmetricCipher::Aes256, SymmetricCipher::Cbc, SymmetricCipher::Decrypt);
+    SymmetricCipher cipher(SymmetricCipher::Aes256, SymmetricCipher::Cbc, SymmetricCipher::Direction::Decrypt);
     QVERIFY(cipher.init(key, iv));
     QCOMPARE(cipher.blockSize(), 16);
 
@@ -103,7 +103,7 @@ void TestSymmetricCipher::testAes256CbcDecryption()
     QByteArray cipherTextPadded = cipherText + QByteArray::fromHex("3a3aa5e0213db1a9901f9036cf5102d2");
     QBuffer buffer(&cipherTextPadded);
     SymmetricCipherStream stream(&buffer, SymmetricCipher::Aes256, SymmetricCipher::Cbc,
-                                 SymmetricCipher::Decrypt);
+                                 SymmetricCipher::Direction::Decrypt);
     QVERIFY(stream.init(key, iv));
     buffer.open(QIODevice::ReadOnly);
     QVERIFY(stream.open(QIODevice::ReadOnly));
@@ -158,7 +158,7 @@ void TestSymmetricCipher::testTwofish256CbcEncryption()
         QByteArray::fromHex("6F725C5950133F82EF021A94CADC8508")
     };
     
-    SymmetricCipher cipher(SymmetricCipher::Twofish, SymmetricCipher::Cbc, SymmetricCipher::Encrypt);
+    SymmetricCipher cipher(SymmetricCipher::Twofish, SymmetricCipher::Cbc, SymmetricCipher::Direction::Encrypt);
     bool ok;
     
     for (int i = 0; i < keys.size(); ++i) {
@@ -220,7 +220,7 @@ void TestSymmetricCipher::testTwofish256CbcDecryption()
         QByteArray::fromHex("4C81F5BDC1081170FF96F50B1F76A566")
     };
     
-    SymmetricCipher cipher(SymmetricCipher::Twofish, SymmetricCipher::Cbc, SymmetricCipher::Decrypt);
+    SymmetricCipher cipher(SymmetricCipher::Twofish, SymmetricCipher::Cbc, SymmetricCipher::Direction::Decrypt);
     bool ok;
     
     for (int i = 0; i < keys.size(); ++i) {
@@ -253,7 +253,7 @@ void TestSymmetricCipher::testSalsa20()
     QByteArray iv = QByteArray::fromHex("0000000000000000");
     bool ok;
 
-    SymmetricCipher cipher(SymmetricCipher::Salsa20, SymmetricCipher::Stream, SymmetricCipher::Encrypt);
+    SymmetricCipher cipher(SymmetricCipher::Salsa20, SymmetricCipher::Stream, SymmetricCipher::Direction::Encrypt);
     QVERIFY(cipher.init(key, iv));
 
     QByteArray cipherTextA;
@@ -312,7 +312,7 @@ void TestSymmetricCipher::testPadding()
     buffer.open(QIODevice::ReadWrite);
 
     SymmetricCipherStream streamEnc(&buffer, SymmetricCipher::Aes256, SymmetricCipher::Cbc,
-                                    SymmetricCipher::Encrypt);
+                                    SymmetricCipher::Direction::Encrypt);
     QVERIFY(streamEnc.init(key, iv));
     streamEnc.open(QIODevice::WriteOnly);
     streamEnc.write(plainText);
@@ -322,7 +322,7 @@ void TestSymmetricCipher::testPadding()
     QCOMPARE(buffer.buffer().size(), 16);
 
     SymmetricCipherStream streamDec(&buffer, SymmetricCipher::Aes256, SymmetricCipher::Cbc,
-                                    SymmetricCipher::Decrypt);
+                                    SymmetricCipher::Direction::Decrypt);
     QVERIFY(streamDec.init(key, iv));
     streamDec.open(QIODevice::ReadOnly);
     QByteArray decrypted = streamDec.readAll();
@@ -337,7 +337,7 @@ void TestSymmetricCipher::testStreamReset()
     QBuffer buffer;
     QVERIFY(buffer.open(QIODevice::WriteOnly));
     SymmetricCipherStream writer(&buffer, SymmetricCipher::Aes256, SymmetricCipher::Cbc,
-                                 SymmetricCipher::Encrypt);
+                                 SymmetricCipher::Direction::Encrypt);
     QVERIFY(writer.init(key, iv));
     QVERIFY(writer.open(QIODevice::WriteOnly));
     QCOMPARE(writer.write(QByteArray(4, 'Z')), qint64(4));

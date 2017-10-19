@@ -125,7 +125,7 @@ Database* KeePass2Reader::readDatabase(QIODevice* device, const CompositeKey& ke
     QByteArray finalKey = hash.result();
 
     SymmetricCipherStream cipherStream(m_device, SymmetricCipher::cipherToAlgorithm(m_db->cipher()),
-                                       SymmetricCipher::Cbc, SymmetricCipher::Decrypt);
+                                       SymmetricCipher::Cbc, SymmetricCipher::Direction::Decrypt);
     if (!cipherStream.init(finalKey, m_encryptionIV)) {
         raiseError(cipherStream.errorString());
         return nullptr;

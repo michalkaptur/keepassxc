@@ -138,7 +138,7 @@ QByteArray SymmetricCipherGcrypt::process(const QByteArray& data, bool* ok)
 
     gcry_error_t error;
 
-    if (m_direction == SymmetricCipher::Decrypt) {
+    if (m_direction == SymmetricCipher::Direction::Decrypt) {
         error = gcry_cipher_decrypt(m_ctx, result.data(), data.size(), data.constData(), data.size());
     }
     else {
@@ -160,7 +160,7 @@ bool SymmetricCipherGcrypt::processInPlace(QByteArray& data)
 
     gcry_error_t error;
 
-    if (m_direction == SymmetricCipher::Decrypt) {
+    if (m_direction == SymmetricCipher::Direction::Decrypt) {
         error = gcry_cipher_decrypt(m_ctx, data.data(), data.size(), nullptr, 0);
     }
     else {
@@ -184,7 +184,7 @@ bool SymmetricCipherGcrypt::processInPlace(QByteArray& data, quint64 rounds)
     char* rawData = data.data();
     int size = data.size();
 
-    if (m_direction == SymmetricCipher::Decrypt) {
+    if (m_direction == SymmetricCipher::Direction::Decrypt) {
         for (quint64 i = 0; i != rounds; ++i) {
             error = gcry_cipher_decrypt(m_ctx, rawData, size, nullptr, 0);
 

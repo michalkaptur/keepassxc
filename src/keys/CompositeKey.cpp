@@ -132,7 +132,7 @@ QByteArray CompositeKey::transformKeyRaw(const QByteArray& key, const QByteArray
 {
     QByteArray iv(16, 0);
     SymmetricCipher cipher(SymmetricCipher::Aes256, SymmetricCipher::Ecb,
-                           SymmetricCipher::Encrypt);
+                           SymmetricCipher::Direction::Encrypt);
     if (!cipher.init(seed, iv)) {
         *ok = false;
         *errorString = cipher.errorString();
@@ -219,7 +219,7 @@ void TransformKeyBenchmarkThread::run()
     QByteArray iv(16, 0);
 
     SymmetricCipher cipher(SymmetricCipher::Aes256, SymmetricCipher::Ecb,
-                           SymmetricCipher::Encrypt);
+                           SymmetricCipher::Direction::Encrypt);
     cipher.init(seed, iv);
 
     QElapsedTimer t;

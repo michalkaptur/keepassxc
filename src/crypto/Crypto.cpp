@@ -134,7 +134,7 @@ bool Crypto::testAes256Cbc()
     cipherText.append(QByteArray::fromHex("9cfc4e967edb808d679f777bc6702c7d"));
     bool ok;
 
-    SymmetricCipher aes256Encrypt(SymmetricCipher::Aes256, SymmetricCipher::Cbc, SymmetricCipher::Encrypt);
+    SymmetricCipher aes256Encrypt(SymmetricCipher::Aes256, SymmetricCipher::Cbc, SymmetricCipher::Direction::Encrypt);
     if (!aes256Encrypt.init(key, iv)) {
         raiseError(aes256Encrypt.errorString());
         return false;
@@ -149,7 +149,7 @@ bool Crypto::testAes256Cbc()
         return false;
     }
 
-    SymmetricCipher aes256Decrypt(SymmetricCipher::Aes256, SymmetricCipher::Cbc, SymmetricCipher::Decrypt);
+    SymmetricCipher aes256Decrypt(SymmetricCipher::Aes256, SymmetricCipher::Cbc, SymmetricCipher::Direction::Decrypt);
     if (!aes256Decrypt.init(key, iv)) {
         raiseError(aes256Decrypt.errorString());
         return false;
@@ -177,7 +177,7 @@ bool Crypto::testAes256Ecb()
     cipherText.append(QByteArray::fromHex("8EA2B7CA516745BFEAFC49904B496089"));
     bool ok;
 
-    SymmetricCipher aes256Encrypt(SymmetricCipher::Aes256, SymmetricCipher::Ecb, SymmetricCipher::Encrypt);
+    SymmetricCipher aes256Encrypt(SymmetricCipher::Aes256, SymmetricCipher::Ecb, SymmetricCipher::Direction::Encrypt);
     if (!aes256Encrypt.init(key, iv)) {
         raiseError(aes256Encrypt.errorString());
         return false;
@@ -192,7 +192,7 @@ bool Crypto::testAes256Ecb()
         return false;
     }
 
-    SymmetricCipher aes256Decrypt(SymmetricCipher::Aes256, SymmetricCipher::Ecb, SymmetricCipher::Decrypt);
+    SymmetricCipher aes256Decrypt(SymmetricCipher::Aes256, SymmetricCipher::Ecb, SymmetricCipher::Direction::Decrypt);
     if (!aes256Decrypt.init(key, iv)) {
         raiseError(aes256Decrypt.errorString());
         return false;
@@ -220,7 +220,7 @@ bool Crypto::testTwofish()
     cipherText.append(QByteArray::fromHex("657b1e7960b30fb7c8d62e72ae37c3a0"));
     bool ok;
 
-    SymmetricCipher twofishEncrypt(SymmetricCipher::Twofish, SymmetricCipher::Cbc, SymmetricCipher::Encrypt);
+    SymmetricCipher twofishEncrypt(SymmetricCipher::Twofish, SymmetricCipher::Cbc, SymmetricCipher::Direction::Encrypt);
     if (!twofishEncrypt.init(key, iv)) {
         raiseError(twofishEncrypt.errorString());
         return false;
@@ -236,7 +236,7 @@ bool Crypto::testTwofish()
     }
 
 
-    SymmetricCipher twofishDecrypt(SymmetricCipher::Twofish, SymmetricCipher::Cbc, SymmetricCipher::Decrypt);
+    SymmetricCipher twofishDecrypt(SymmetricCipher::Twofish, SymmetricCipher::Cbc, SymmetricCipher::Direction::Decrypt);
     if (!twofishDecrypt.init(key, iv)) {
         raiseError(twofishEncrypt.errorString());
         return false;
@@ -263,7 +263,7 @@ bool Crypto::testSalsa20()
     bool ok;
 
     SymmetricCipher salsa20Stream(SymmetricCipher::Salsa20, SymmetricCipher::Stream,
-                                  SymmetricCipher::Encrypt);
+                                  SymmetricCipher::Direction::Encrypt);
     if (!salsa20Stream.init(salsa20Key, salsa20iv)) {
         raiseError(salsa20Stream.errorString());
         return false;

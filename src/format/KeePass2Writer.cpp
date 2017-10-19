@@ -94,7 +94,7 @@ void KeePass2Writer::writeDatabase(QIODevice* device, Database* db)
     CHECK_RETURN(writeData(header.data()));
 
     SymmetricCipherStream cipherStream(device, SymmetricCipher::cipherToAlgorithm(db->cipher()),
-                                       SymmetricCipher::Cbc, SymmetricCipher::Encrypt);
+                                       SymmetricCipher::Cbc, SymmetricCipher::Direction::Encrypt);
     cipherStream.init(finalKey, encryptionIV);
     if (!cipherStream.open(QIODevice::WriteOnly)) {
         raiseError(cipherStream.errorString());

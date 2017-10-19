@@ -342,11 +342,11 @@ SymmetricCipherStream* KeePass1Reader::testKeys(const QString& password, const Q
         }
         if (m_encryptionFlags & KeePass1::Rijndael) {
             cipherStream.reset(new SymmetricCipherStream(m_device, SymmetricCipher::Aes256,
-                    SymmetricCipher::Cbc, SymmetricCipher::Decrypt));
+                    SymmetricCipher::Cbc, SymmetricCipher::Direction::Decrypt));
         }
         else {
             cipherStream.reset(new SymmetricCipherStream(m_device, SymmetricCipher::Twofish,
-                    SymmetricCipher::Cbc, SymmetricCipher::Decrypt));
+                    SymmetricCipher::Cbc, SymmetricCipher::Direction::Decrypt));
         }
 
         if (!cipherStream->init(finalKey, m_encryptionIV)) {

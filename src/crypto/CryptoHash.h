@@ -25,7 +25,7 @@ class CryptoHashPrivate;
 class CryptoHash
 {
 public:
-    enum Algorithm
+    enum class Algorithm
     {
         Sha256
     };
