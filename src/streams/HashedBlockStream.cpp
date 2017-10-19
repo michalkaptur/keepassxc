@@ -169,7 +169,7 @@ bool HashedBlockStream::readHashedBlock()
         return false;
     }
 
-    if (hash != CryptoHash::hash(m_buffer, CryptoHash::Algorithm::Sha256)) {
+    if (hash != CryptoHash::hash(m_buffer)) {
         m_error = true;
         setErrorString("Mismatch between hash and data.");
         return false;
@@ -226,7 +226,7 @@ bool HashedBlockStream::writeHashedBlock()
 
     QByteArray hash;
     if (!m_buffer.isEmpty()) {
-        hash = CryptoHash::hash(m_buffer, CryptoHash::Algorithm::Sha256);
+        hash = CryptoHash::hash(m_buffer);
     }
     else {
         hash.fill(0, 32);

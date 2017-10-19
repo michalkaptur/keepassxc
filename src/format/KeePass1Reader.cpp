@@ -406,7 +406,7 @@ QByteArray KeePass1Reader::key(const QByteArray& password, const QByteArray& key
         return QByteArray();
     }
 
-    CryptoHash hash(CryptoHash::Algorithm::Sha256);
+    CryptoHash hash;
     hash.addData(m_masterSeed);
     hash.addData(transformedKey);
     return hash.result();
@@ -414,7 +414,7 @@ QByteArray KeePass1Reader::key(const QByteArray& password, const QByteArray& key
 
 bool KeePass1Reader::verifyKey(SymmetricCipherStream* cipherStream)
 {
-    CryptoHash contentHash(CryptoHash::Algorithm::Sha256);
+    CryptoHash contentHash;
     QByteArray buffer;
 
     do {
@@ -1009,7 +1009,7 @@ QByteArray KeePass1Reader::readKeyfile(QIODevice* device)
         }
     }
 
-    CryptoHash cryptoHash(CryptoHash::Algorithm::Sha256);
+    CryptoHash cryptoHash;
     QByteArray buffer;
 
     do {
@@ -1026,14 +1026,14 @@ QByteArray KeePass1Reader::readKeyfile(QIODevice* device)
 QByteArray KeePass1Key::rawKey() const
 {
     if (m_keyfileData.isEmpty()) {
-        return CryptoHash::hash(m_password, CryptoHash::Algorithm::Sha256);
+        return CryptoHash::hash(m_password);
     }
     else if (m_password.isEmpty()) {
         return m_keyfileData;
     }
     else {
-        CryptoHash keyHash(CryptoHash::Algorithm::Sha256);
-        keyHash.addData(CryptoHash::hash(m_password, CryptoHash::Algorithm::Sha256));
+        CryptoHash keyHash;
+        keyHash.addData(CryptoHash::hash(m_password));
         keyHash.addData(m_keyfileData);
         return keyHash.result();
     }

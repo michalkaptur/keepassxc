@@ -82,7 +82,7 @@ CompositeKey& CompositeKey::operator=(const CompositeKey& key)
 
 QByteArray CompositeKey::rawKey() const
 {
-    CryptoHash cryptoHash(CryptoHash::Algorithm::Sha256);
+    CryptoHash cryptoHash;
 
     for (const Key* key : m_keys) {
         cryptoHash.addData(key->rawKey());
@@ -124,7 +124,7 @@ QByteArray CompositeKey::transform(const QByteArray& seed, quint64 rounds,
         return QByteArray();
     }
 
-    return CryptoHash::hash(transformed, CryptoHash::Algorithm::Sha256);
+    return CryptoHash::hash(transformed);
 }
 
 QByteArray CompositeKey::transformKeyRaw(const QByteArray& key, const QByteArray& seed,
@@ -160,7 +160,7 @@ bool CompositeKey::challenge(const QByteArray& seed, QByteArray& result) const
         return true;
     }
 
-    CryptoHash cryptoHash(CryptoHash::Algorithm::Sha256);
+    CryptoHash cryptoHash;
 
     for (const auto key : m_challengeResponseKeys) {
         // if the device isn't present or fails, return an error

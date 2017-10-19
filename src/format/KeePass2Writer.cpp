@@ -56,7 +56,7 @@ void KeePass2Writer::writeDatabase(QIODevice* device, Database* db)
         return;
     }
 
-    CryptoHash hash(CryptoHash::Algorithm::Sha256);
+    CryptoHash hash;
     hash.addData(masterSeed);
     hash.addData(db->challengeResponseKey());
     Q_ASSERT(!db->transformedMasterKey().isEmpty());
@@ -90,7 +90,7 @@ void KeePass2Writer::writeDatabase(QIODevice* device, Database* db)
 
     header.close();
     m_device = device;
-    QByteArray headerHash = CryptoHash::hash(header.data(), CryptoHash::Algorithm::Sha256);
+    QByteArray headerHash = CryptoHash::hash(header.data());
     CHECK_RETURN(writeData(header.data()));
 
     SymmetricCipherStream cipherStream(device, SymmetricCipher::cipherToAlgorithm(db->cipher()),

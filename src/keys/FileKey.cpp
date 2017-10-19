@@ -264,7 +264,7 @@ bool FileKey::loadHex(QIODevice* device)
 
 bool FileKey::loadHashed(QIODevice* device)
 {
-    CryptoHash cryptoHash(CryptoHash::Algorithm::Sha256);
+    CryptoHash cryptoHash;
 
     QByteArray buffer;
     do {

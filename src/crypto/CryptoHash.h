@@ -30,13 +30,13 @@ public:
         Sha256
     };
 
-    explicit CryptoHash(CryptoHash::Algorithm algo);
+    explicit CryptoHash(Algorithm algo = Algorithm::Sha256);
     ~CryptoHash();
     void addData(const QByteArray& data);
     void reset();
     QByteArray result() const;
 
-    static QByteArray hash(const QByteArray& data, CryptoHash::Algorithm algo);
+    static QByteArray hash(const QByteArray& data, Algorithm algo = Algorithm::Sha256);
 
 private:
     CryptoHashPrivate* const d_ptr;

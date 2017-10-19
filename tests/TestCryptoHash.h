@@ -25,8 +25,10 @@ class TestCryptoHash : public QObject
     Q_OBJECT
 
 private slots:
-    void initTestCase();
-    void test();
+    void testEmptyDataHash();
+    void testDefaultAlgorithm();
+    void testExampleString();
+    void testTwoDataParts();
 };
 
 #endif // KEEPASSX_TESTCRYPTOHASH_H
