@@ -48,8 +48,7 @@ public:
         Encrypt
     };
 
-    SymmetricCipher(SymmetricCipher::Algorithm algo, SymmetricCipher::Mode mode,
-                    SymmetricCipher::Direction direction);
+    SymmetricCipher(Algorithm algo, Mode mode, Direction direction);
     ~SymmetricCipher() = default;
 
     bool init(const QByteArray& key, const QByteArray& iv);
@@ -72,12 +71,12 @@ public:
     int blockSize() const;
     QString errorString() const;
 
-    static SymmetricCipher::Algorithm cipherToAlgorithm(Uuid cipher);
-    static Uuid algorithmToCipher(SymmetricCipher::Algorithm algo);
+    static Algorithm cipherToAlgorithm(Uuid cipher);
+    static Uuid algorithmToCipher(Algorithm algo);
 
 private:
-    static SymmetricCipherBackend* createBackend(SymmetricCipher::Algorithm algo, SymmetricCipher::Mode mode,
-                                                 SymmetricCipher::Direction direction);
+    static SymmetricCipherBackend* createBackend(Algorithm algo, Mode mode,
+                                                 Direction direction);
 
     const QScopedPointer<SymmetricCipherBackend> m_backend;
     bool m_initialized;
