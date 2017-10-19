@@ -132,7 +132,7 @@ static QString encrypt(const QString & data, SymmetricCipherGcrypt & cipher)
 
 Request::Request():
     m_requestType(INVALID),
-    m_cipher(SymmetricCipher::Aes256, SymmetricCipher::Mode::Cbc, SymmetricCipher::Direction::Decrypt)
+    m_cipher(SymmetricCipher::Algorithm::Aes256, SymmetricCipher::Mode::Cbc, SymmetricCipher::Direction::Decrypt)
 {
   m_cipher.init();
 }
@@ -304,7 +304,7 @@ Response::Response(const Request &request, QString hash):
     m_count(-1),
     m_version(STR_VERSION),
     m_hash(hash),
-    m_cipher(SymmetricCipher::Aes256, SymmetricCipher::Mode::Cbc, SymmetricCipher::Direction::Encrypt)
+    m_cipher(SymmetricCipher::Algorithm::Aes256, SymmetricCipher::Mode::Cbc, SymmetricCipher::Direction::Encrypt)
 {
   m_cipher.init();
 }

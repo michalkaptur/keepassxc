@@ -28,7 +28,7 @@
 class SymmetricCipher
 {
 public:
-    enum Algorithm
+    enum class Algorithm
     {
         Aes256,
         Twofish,

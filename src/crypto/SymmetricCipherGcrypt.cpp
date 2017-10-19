@@ -38,13 +38,13 @@ SymmetricCipherGcrypt::~SymmetricCipherGcrypt()
 int SymmetricCipherGcrypt::gcryptAlgo(SymmetricCipher::Algorithm algo)
 {
     switch (algo) {
-    case SymmetricCipher::Aes256:
+    case SymmetricCipher::Algorithm::Aes256:
         return GCRY_CIPHER_AES256;
 
-    case SymmetricCipher::Twofish:
+    case SymmetricCipher::Algorithm::Twofish:
         return GCRY_CIPHER_TWOFISH;
 
-    case SymmetricCipher::Salsa20:
+    case SymmetricCipher::Algorithm::Salsa20:
         return GCRY_CIPHER_SALSA20;
 
     default:

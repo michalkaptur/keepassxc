@@ -55,7 +55,8 @@ void DatabaseSettingsWidget::load(Database* db)
     m_ui->dbDescriptionEdit->setText(meta->description());
     m_ui->recycleBinEnabledCheckBox->setChecked(meta->recycleBinEnabled());
     m_ui->defaultUsernameEdit->setText(meta->defaultUserName());
-    m_ui->AlgorithmComboBox->setCurrentIndex(SymmetricCipher::cipherToAlgorithm(m_db->cipher()));
+    // FIXME: combo box for algorithm selection depends on underlying enum values
+    m_ui->AlgorithmComboBox->setCurrentIndex(static_cast<int>(SymmetricCipher::cipherToAlgorithm(m_db->cipher())));
     m_ui->transformRoundsSpinBox->setValue(m_db->transformRounds());
     if (meta->historyMaxItems() > -1) {
         m_ui->historyMaxItemsSpinBox->setValue(meta->historyMaxItems());

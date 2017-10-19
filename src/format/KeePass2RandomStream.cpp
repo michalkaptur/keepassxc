@@ -21,7 +21,7 @@
 #include "format/KeePass2.h"
 
 KeePass2RandomStream::KeePass2RandomStream()
-    : m_cipher(SymmetricCipher::Salsa20, SymmetricCipher::Mode::Stream, SymmetricCipher::Direction::Encrypt)
+    : m_cipher(SymmetricCipher::Algorithm::Salsa20, SymmetricCipher::Mode::Stream, SymmetricCipher::Direction::Encrypt)
     , m_offset(0)
 {
 }

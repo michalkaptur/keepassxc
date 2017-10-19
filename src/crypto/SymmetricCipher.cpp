@@ -20,8 +20,7 @@
 #include "config-keepassx.h"
 #include "crypto/SymmetricCipherGcrypt.h"
 
-SymmetricCipher::SymmetricCipher(SymmetricCipher::Algorithm algo, SymmetricCipher::Mode mode,
-                                 SymmetricCipher::Direction direction)
+SymmetricCipher::SymmetricCipher(Algorithm algo, Mode mode, Direction direction)
     : m_backend(createBackend(algo, mode, direction))
     , m_initialized(false)
 {
@@ -50,13 +49,13 @@ bool SymmetricCipher::isInitalized() const
     return m_initialized;
 }
 
-SymmetricCipherBackend* SymmetricCipher::createBackend(SymmetricCipher::Algorithm algo, SymmetricCipher::Mode mode,
-                                                       SymmetricCipher::Direction direction)
+SymmetricCipherBackend* SymmetricCipher::createBackend(Algorithm algo, Mode mode,
+                                                       Direction direction)
 {
     switch (algo) {
-    case SymmetricCipher::Aes256:
-    case SymmetricCipher::Twofish:
-    case SymmetricCipher::Salsa20:
+    case Algorithm::Aes256:
+    case Algorithm::Twofish:
+    case Algorithm::Salsa20:
         return new SymmetricCipherGcrypt(algo, mode, direction);
 
     default:
@@ -83,17 +82,17 @@ QString SymmetricCipher::errorString() const
 SymmetricCipher::Algorithm SymmetricCipher::cipherToAlgorithm(Uuid cipher)
 {
     if (cipher == KeePass2::CIPHER_AES) {
-        return SymmetricCipher::Aes256;
+        return Algorithm::Aes256;
     }
     else {
-        return SymmetricCipher::Twofish;
+        return Algorithm::Twofish;
     }
 }
 
-Uuid SymmetricCipher::algorithmToCipher(SymmetricCipher::Algorithm algo)
+Uuid SymmetricCipher::algorithmToCipher(Algorithm algo)
 {
     switch (algo) {
-    case SymmetricCipher::Aes256:
+    case Algorithm::Aes256:
         return KeePass2::CIPHER_AES;
     default:
         return KeePass2::CIPHER_TWOFISH;

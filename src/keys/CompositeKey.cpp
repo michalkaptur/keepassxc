@@ -131,7 +131,7 @@ QByteArray CompositeKey::transformKeyRaw(const QByteArray& key, const QByteArray
                                          quint64 rounds, bool* ok, QString* errorString)
 {
     QByteArray iv(16, 0);
-    SymmetricCipher cipher(SymmetricCipher::Aes256, SymmetricCipher::Mode::Ecb,
+    SymmetricCipher cipher(SymmetricCipher::Algorithm::Aes256, SymmetricCipher::Mode::Ecb,
                            SymmetricCipher::Direction::Encrypt);
     if (!cipher.init(seed, iv)) {
         *ok = false;
@@ -218,7 +218,7 @@ void TransformKeyBenchmarkThread::run()
     QByteArray seed = QByteArray(32, '\x4B');
     QByteArray iv(16, 0);
 
-    SymmetricCipher cipher(SymmetricCipher::Aes256, SymmetricCipher::Mode::Ecb,
+    SymmetricCipher cipher(SymmetricCipher::Algorithm::Aes256, SymmetricCipher::Mode::Ecb,
                            SymmetricCipher::Direction::Encrypt);
     cipher.init(seed, iv);
 
