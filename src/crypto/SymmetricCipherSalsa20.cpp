@@ -23,7 +23,7 @@ SymmetricCipherSalsa20::SymmetricCipherSalsa20(SymmetricCipher::Algorithm algo, 
     Q_ASSERT(algo == SymmetricCipher::Salsa20);
     Q_UNUSED(algo);
 
-    Q_ASSERT(mode == SymmetricCipher::Stream);
+    Q_ASSERT(mode == SymmetricCipher::Mode::Stream);
     Q_UNUSED(mode);
 
     Q_UNUSED(direction);

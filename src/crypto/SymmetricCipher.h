@@ -35,7 +35,7 @@ public:
         Salsa20
     };
 
-    enum Mode
+    enum class Mode
     {
         Cbc,
         Ecb,

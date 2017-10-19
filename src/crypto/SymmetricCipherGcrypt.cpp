@@ -56,13 +56,13 @@ int SymmetricCipherGcrypt::gcryptAlgo(SymmetricCipher::Algorithm algo)
 int SymmetricCipherGcrypt::gcryptMode(SymmetricCipher::Mode mode)
 {
     switch (mode) {
-    case SymmetricCipher::Ecb:
+    case SymmetricCipher::Mode::Ecb:
         return GCRY_CIPHER_MODE_ECB;
 
-    case SymmetricCipher::Cbc:
+    case SymmetricCipher::Mode::Cbc:
         return GCRY_CIPHER_MODE_CBC;
 
-    case SymmetricCipher::Stream:
+    case SymmetricCipher::Mode::Stream:
         return GCRY_CIPHER_MODE_STREAM;
 
     default:
