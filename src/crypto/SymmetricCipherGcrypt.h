@@ -30,18 +30,18 @@ public:
                           SymmetricCipher::Direction direction);
     ~SymmetricCipherGcrypt();
 
-    bool init();
-    bool setKey(const QByteArray& key);
-    bool setIv(const QByteArray& iv);
+    bool init() final;
+    bool setKey(const QByteArray& key) final;
+    bool setIv(const QByteArray& iv) final;
 
-    QByteArray process(const QByteArray& data, bool* ok);
-    Q_REQUIRED_RESULT bool processInPlace(QByteArray& data);
-    Q_REQUIRED_RESULT bool processInPlace(QByteArray& data, quint64 rounds);
+    QByteArray process(const QByteArray& data, bool* ok) final;
+    Q_REQUIRED_RESULT bool processInPlace(QByteArray& data) final;
+    Q_REQUIRED_RESULT bool processInPlace(QByteArray& data, quint64 rounds) final;
 
-    bool reset();
-    int blockSize() const;
+    bool reset() final;
+    int blockSize() const final;
 
-    QString errorString() const;
+    QString errorString() const final;
 
 private:
     static int gcryptAlgo(SymmetricCipher::Algorithm algo);
