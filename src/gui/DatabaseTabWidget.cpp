@@ -129,7 +129,12 @@ void DatabaseTabWidget::openDatabase(const QString& fileName, const QString& pw,
     while (i.hasNext()) {
         i.next();
         if (i.value().canonicalFilePath == canonicalFilePath) {
-            setCurrentIndex(databaseIndex(i.key()));
+            if (!i.value().dbWidget->dbHasKey() && (!pw.isNull() || !keyFile.isEmpty())) {
+                // If the database is locked and a pw or keyfile is provided, unlock it
+                i.value().dbWidget->switchToOpenDatabase(i.value().filePath, pw, keyFile);
+            } else {
+                setCurrentIndex(databaseIndex(i.key()));
+            }
             return;
         }
     }
