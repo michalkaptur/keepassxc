@@ -30,7 +30,7 @@ public:
     static QString backendVersion();
 
 private:
-    Crypto();
+    Crypto() = default;
     static bool checkAlgorithms();
     static bool selfTest();
     static void raiseError(const QString& str);

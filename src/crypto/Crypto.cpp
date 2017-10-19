@@ -29,10 +29,6 @@ bool Crypto::m_initalized(false);
 QString Crypto::m_errorStr;
 QString Crypto::m_backendVersion;
 
-Crypto::Crypto()
-{
-}
-
 bool Crypto::init()
 {
     if (m_initalized) {
