@@ -118,7 +118,7 @@ Database* KeePass2Reader::readDatabase(QIODevice* device, const CompositeKey& ke
         return nullptr;
     }
 
-    CryptoHash hash(CryptoHash::Sha256);
+    CryptoHash hash(CryptoHash::Algorithm::Sha256);
     hash.addData(m_masterSeed);
     hash.addData(m_db->challengeResponseKey());
     hash.addData(m_db->transformedMasterKey());
@@ -195,7 +195,7 @@ Database* KeePass2Reader::readDatabase(QIODevice* device, const CompositeKey& ke
     Q_ASSERT(version < 0x00030001 || !xmlReader.headerHash().isEmpty());
 
     if (!xmlReader.headerHash().isEmpty()) {
-        QByteArray headerHash = CryptoHash::hash(headerStream.storedData(), CryptoHash::Sha256);
+        QByteArray headerHash = CryptoHash::hash(headerStream.storedData(), CryptoHash::Algorithm::Sha256);
         if (headerHash != xmlReader.headerHash()) {
             raiseError("Header doesn't match hash");
             return nullptr;

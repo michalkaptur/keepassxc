@@ -38,7 +38,7 @@ CryptoHash::CryptoHash(CryptoHash::Algorithm algo)
     int algoGcrypt;
 
     switch (algo) {
-    case CryptoHash::Sha256:
+    case CryptoHash::Algorithm::Sha256:
         algoGcrypt = GCRY_MD_SHA256;
         break;
 

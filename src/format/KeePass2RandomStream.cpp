@@ -28,7 +28,7 @@ KeePass2RandomStream::KeePass2RandomStream()
 
 bool KeePass2RandomStream::init(const QByteArray& key)
 {
-    return m_cipher.init(CryptoHash::hash(key, CryptoHash::Sha256),
+    return m_cipher.init(CryptoHash::hash(key, CryptoHash::Algorithm::Sha256),
                          KeePass2::INNER_STREAM_SALSA20_IV);
 }
 

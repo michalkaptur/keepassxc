@@ -114,7 +114,7 @@ void Crypto::raiseError(const QString& str)
 bool Crypto::testSha256()
 {
     QByteArray sha256Test = CryptoHash::hash("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
-                                             CryptoHash::Sha256);
+                                             CryptoHash::Algorithm::Sha256);
 
     if (sha256Test != QByteArray::fromHex("248D6A61D20638B8E5C026930C3E6039A33CE45964FF2167F6ECEDD419DB06C1")) {
         raiseError("SHA-256 mismatch.");
